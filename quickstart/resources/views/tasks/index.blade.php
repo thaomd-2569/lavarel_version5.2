@@ -49,7 +49,7 @@
                 <table class="table table-striped task-table">
                     <thead>
                         <th>Task</th>
-                        <th>Assignment</th>
+
                         <th>&nbsp;</th>
                     </thead>
                     <tbody>
@@ -58,13 +58,11 @@
                             <td class="table-text">
                                 <div>{{ $task->name }}</div>
                             </td>
-                            <td class="table-text">
-                                <div>{{ $task->user->name }}</div>
-                            </td>
+
 
                             <!-- Task Delete Button -->
                             <td>
-                                <form action="{{url('tasks/{task}?id=' . $task->id)}}" method="POST">
+                                <form action="{{url('tasks/{}?id=' . $task->id)}}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
