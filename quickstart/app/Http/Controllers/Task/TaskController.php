@@ -42,24 +42,24 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|max:255',
-        // ]);
-        // if ($validator->fails()) {  
-        //     return redirect('tasks')
-        //                 ->withErrors(['just delete task yourself'])
-        //                 ->withInput();
-        // }
-        
-        // $request['user_id'] =  Auth::user()->id; 
-        // $task = new Task($request->all());
-        // $task->save();
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
         ]);
-        $request->user()->tasks()->create([
-            'name' => $request->name,
-        ]);
+        if ($validator->fails()) {  
+            return redirect('tasks')
+                        ->withErrors(['just delete task yourself'])
+                        ->withInput();
+        }
+        
+        $request['user_id'] =  Auth::user()->id; 
+        $task = new Task($request->all());
+        $task->save();
+        // $this->validate($request, [
+        //     'name' => 'required|max:255',
+        // ]);
+        // $request->user()->tasks()->create([
+        //     'name' => $request->name,
+        // ]);
         return redirect('/tasks');
     }
 
